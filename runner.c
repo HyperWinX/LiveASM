@@ -9,15 +9,17 @@ enum InstructionType
 	MOV
 };
 
-typedef struct regs_t{
-	uint16_t ax, bx, cx, dx;
-	uint16_t sp, bp;
-	uint16_t si, di, cs, ds, ss, es;
+union Registers{
+	uint64_t rax;
+        struct {
+		uint32_t eax;
+		uint16_t ax;
+		uint8_t al;                                       uint8_t ah;
+        };
 };
 
 void TokenizeInstruction(char* input, char* instruction, char* operand1, char* operand2) {
     char* token = strtok(input, " ,");
-
     if (token != NULL) {
         sprintf(instruction, 8, "%s", token);
         token = strtok(NULL, " ,");
@@ -39,7 +41,13 @@ enum InstructionType DefineInstruction(char* instruction){
 }
 
 void ExecuteInstruction(enum InstructionType instructiontp, char* operand1, char* operand2){
-	
+	switch(instructiontp){
+		case MOV:
+			
+			break;
+		default:
+			ExitIllegalInstr();
+	}
 }
 
 void CommandExecute(char* command){
