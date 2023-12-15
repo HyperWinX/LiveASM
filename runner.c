@@ -1,21 +1,14 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdio.h>
+#include "cpu.h"
 
-regs_t regs = {0};
+uint8_t cpuInit = 0;
+struct CPU* cpu;
 
 enum InstructionType
 	UNKNOWN_INSTR,
 	MOV
-};
-
-union Registers{
-	uint64_t rax;
-        struct {
-		uint32_t eax;
-		uint16_t ax;
-		uint8_t al;                                       uint8_t ah;
-        };
 };
 
 void TokenizeInstruction(char* input, char* instruction, char* operand1, char* operand2) {
@@ -50,7 +43,8 @@ void ExecuteInstruction(enum InstructionType instructiontp, char* operand1, char
 	}
 }
 
-void CommandExecute(char* command){
+void CommandExecute(char* command)
+	if (!cpuInit) CPUInit();
 	char instruction[8] = {0};
 	char operand1[24] = {0};
 	char operand1[256] = {0};
@@ -61,4 +55,26 @@ void CommandExecute(char* command){
 		ExitIllegalInstr();
 	ExecuteInstruction(instructiontp, operand1, operand2);
 
+}
+
+void CPUInit(void){
+	cpu = (struct CPU*)calloc(sizeof(struct CPU), 1);
+	if (!cpu)
+		ExitCPUInitFailure();
+	cpuInit = 1;
+	cpu->ax = &cpu->eax;
+	cpu->al = &cpu->eax;
+	cpu->ah = cpu->al + 1;
+
+	cpu->bx = &cpu->ebx;
+	cpu->bl = &cpu->ebx;
+	cpu->bh = cpu->bl + 1;
+
+	cpu->cx = &cpu->ecx;
+	cpu->cl = &cpu->ecx;
+	cpu->ch = cpu->cl + 1;
+
+	cpu->dx = &cpu->edx;
+	cpu->dl = &cpu->edx;
+	cpu->dh = cpu->dl + 1;
 }
