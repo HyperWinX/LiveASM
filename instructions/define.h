@@ -15,4 +15,9 @@ int32_t DefineMode(char* operand1, char* operand2){
 	else if (strcmp(operand1, "ax") == 0) mode = 0x0009;
 	else if (strcmp(operand1, "bx") == 0) mode = 0x000A;
 	else if (strcmp(operand1, "cx") == 0) mode = 0x000B;
+	else if (strcmp(operand1, "dx") == 0) mode = 0x000C;
+	else if (strcmp(operand1, "ah") == 0) mode = 0x000D;
+	else if (strcmp(operand1, "bh") == 0) mode = 0x000E;
+	else if (strcmp(operand1, "ch") == 0) mode = 0x000F;
+	else if (strcmp(operand1, "dh") == 0) mode = 0x0010;
 }
