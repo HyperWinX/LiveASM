@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include "define.h"
 
-int16_t Define(char* operand){
+int16_t DefineSingleMode(char* operand){
 	if (strcmp(operand, "eax") == 0) return 0x0001;
 	else if (strcmp(operand, "ebx") == 0) return 0x0002;
 	else if (strcmp(operand, "ecx") == 0) return 0x0003;

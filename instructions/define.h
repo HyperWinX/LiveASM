@@ -2,6 +2,10 @@
 #define DEFINE_H
 #include <stdint.h>
 
+#define BITS32 1
+#define BITS16 2
+#define BITS8 3
+
 #define EAX 0x0001                                #define EBX 0x0002
 #define ECX 0x0003
 #define EDX 0x0004
@@ -26,6 +30,8 @@
 #define MEMADDR 0x0017
 #define MEMVAL 0x0018
 #define INVALID 0xFFFF
+
+int16_t DefineSingleMode(char* operand);
 
 int32_t DefineMode(char* operand1, char* operand2);
 #endif
