@@ -2,11 +2,17 @@
 #define DEFINE_H
 #include <stdint.h>
 
+#define OUTOFRANGE 1
+#define NOTCOMPARABLESIZES 2
+#define NOTTARGETABLECONSTANT 3
+#define POINTERCREATIONFAILURE 4
+
 #define BITS32 1
 #define BITS16 2
 #define BITS8 3
 
-#define EAX 0x0001                                #define EBX 0x0002
+#define EAX 0x0001
+#define EBX 0x0002
 #define ECX 0x0003
 #define EDX 0x0004
 #define ESP 0x0005

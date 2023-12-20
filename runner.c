@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 #include "cpu.h"
@@ -36,15 +37,15 @@ enum InstructionType DefineInstruction(char* instruction){
 void ExecuteInstruction(enum InstructionType instructiontp, char* operand1, char* operand2){
 	switch(instructiontp){
 		case MOV:
-			
+			ExecuteMOV();
 			break;
 		default:
 			ExitIllegalInstr();
 	}
 }
 
-void CommandExecute(char* command)
-	if (!cpuInit) CPUInit();
+void CommandExecute(char* command, int memsize)
+	if (!cpuInit) CPUInit(memsize);
 	char instruction[8] = {0};
 	char operand1[24] = {0};
 	char operand1[256] = {0};
@@ -77,4 +78,6 @@ void CPUInit(void){
 	cpu->dx = &cpu->edx;
 	cpu->dl = &cpu->edx;
 	cpu->dh = cpu->dl + 1;
+
+	cpu->memory = (char*)calloc(sizeof(char), mem_size);
 }
